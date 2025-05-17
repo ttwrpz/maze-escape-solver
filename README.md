@@ -65,44 +65,54 @@ The UML class diagram can be found in the [docs directory](docs/UML_Diagram.png)
 
 ```mermaid
 classDiagram
-direction BT
-class Cell {
-  + Cell(int, int, int) 
-  - int row
-  - int distance
-  - int col
-  + toString() String
-   int distance
-   int col
-   int row
-}
-class CellQueue {
-  + CellQueue() 
-  + peek() Cell
-  + dequeue() Cell
-  + enqueue(Cell) void
-  + size() int
-   boolean empty
-}
-class MazeSolver {
-  + MazeSolver() 
-  + main(String[]) void
-  - isValid(int, int, int, int) boolean
-  + solveEscapeMaze(char[][], int[]) int
-}
-class Node {
-  + Node(Cell) 
-  - Cell data
-  - Node next
-   Node next
-   Cell data
-}
+   direction BT
+   class Cell {
+      + Cell(int, int, int)
+      - int row
+      - int distance
+      - int col
+      + getCol() int
+      + toString() String
+      + getDistance() int
+      + setDistance(int) void
+      + getRow() int
+   }
+   class CellQueue {
+      + CellQueue()
+      - Node rear
+      - Node front
+      - int size
+      + size() int
+      + enqueue(Cell) void
+      + peek() Cell
+      + dequeue() Cell
+      + isEmpty() boolean
+   }
+   class Maze {
+      + Maze()
+      - int[][] DIRECTIONS
+      - isValid(int, int, int, int) boolean
+      + solveEscapeMaze(char[][], int[]) int
+   }
+   class MazeSolver {
+      + MazeSolver()
+      + main(String[]) void
+   }
+   class Node {
+      + Node(Cell)
+      - Cell data
+      - Node next
+      + setNext(Node) void
+      + getNext() Node
+      + getData() Cell
+      + setData(Cell) void
+   }
 
-CellQueue "1" *--> "front 1" Node 
-CellQueue  ..>  Node : «create»
-MazeSolver  ..>  Cell : «create»
-MazeSolver  ..>  CellQueue : «create»
-Node "1" *--> "data 1" Cell
+   CellQueue "1" *--> "front 1" Node
+   CellQueue  ..>  Node : «create»
+   Maze  ..>  Cell : «create»
+   Maze  ..>  CellQueue : «create»
+   Node "1" *--> "data 1" Cell
 ```
 
 ## Notes
